@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import PostForm from "./PostForm";
 
 class Post extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div>
@@ -15,7 +12,7 @@ class Post extends Component {
                 |
                 <Link to={`/posts/${this.props.id}`}>Show</Link>
                 |
-                <Link to={`/posts/${this.props.id}`}>Edit</Link>
+                <Link to={`/posts/${this.props.id}/edit`}>Edit</Link>
                 |
                 Delete
             </div>

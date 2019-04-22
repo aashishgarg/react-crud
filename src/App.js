@@ -10,7 +10,7 @@ class App extends Component {
             <Router>
                 <Route path='/' exact component={AllPost} />
                 <Route path='/posts/:id' component={ShowPost}/>
-                <Route path='/posts/:id' component={PostForm}/>
+                <Route path='/posts/:id/edit' component={PostForm}/>
             </Router>
         );
     }
