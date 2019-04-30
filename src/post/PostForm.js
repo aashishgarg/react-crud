@@ -13,6 +13,7 @@ class PostForm extends Component {
         this.titleChanged = this.titleChanged.bind(this);
         this.subjectChanged = this.subjectChanged.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.contentChanged = this.contentChanged.bind(this);
     }
 
     componentDidMount() {
@@ -45,6 +46,12 @@ class PostForm extends Component {
         })
     };
 
+    contentChanged(e) {
+        this.setState({
+            content: e.target.value
+        })
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         axios({
@@ -53,7 +60,7 @@ class PostForm extends Component {
             data: {
                 post: {
                     title: this.state.title,
-                    subject: this.state.title,
+                    subject: this.state.subject,
                     content: this.state.content
                 }
             }
@@ -67,12 +74,22 @@ class PostForm extends Component {
             <div>
                 <h1>Create Post</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <input required type="text" onChange={this.titleChanged} placeholder="Enter Post Title" name="title"
-                           value={this.state.title}/><br/><br/><br/>
-                    <input required type="text" onChange={this.subjectChanged} placeholder="Enter Post subject"
-                           name="subject" value={this.state.subject}/><br/><br/><br/>
-                    <textarea required rows="5" cols="28" placeholder="Enter Post"/><br/><br/><br/>
-                    <button>Post</button>
+                    <div className="form-group">
+                        <label htmlFor="title">Email address:</label>
+                        <input required type="text" onChange={this.titleChanged} placeholder="Enter Post Title" name="title"
+                               value={this.state.title} className="form-control" id="title"/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="subject">Subject:</label>
+                        <input required type="text" onChange={this.subjectChanged} placeholder="Enter Post subject"
+                               name="subject" value={this.state.subject} className="form-control" id="subject"/>
+                    </div>
+                    <div className="checkbox">
+                        <label htmlFor="content">Content:</label>
+                        <textarea required rows="5" cols="28" placeholder="Enter Post" onChange={this.contentChanged}
+                                  value={this.state.content} className="form-control" id="content"/>
+                    </div>
+                    <button type="submit" className="btn btn-default">Submit</button>
                 </form>
             </div>
         )
