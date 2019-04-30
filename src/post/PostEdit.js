@@ -6,7 +6,8 @@ class PostEdit extends Component {
         super(props);
         this.state = {
             title: '',
-            subject: ''
+            subject: '',
+            content: ''
         };
 
         this.titleChanged = this.titleChanged.bind(this);
