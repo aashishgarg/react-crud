@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {Link} from "react-router-dom";
 
 class PostShow extends Component {
     constructor(props) {
@@ -37,6 +38,9 @@ class PostShow extends Component {
                     Title: <p>{this.state.title}</p>
                     Subject: <p>{this.state.subject}</p>
                     Content: <p>{this.state.content}</p>
+                </div>
+                <div>
+                    <Link to={`/posts/${this.props.match.params.id}/edit`}>Edit this post</Link>
                 </div>
             </div>
         )

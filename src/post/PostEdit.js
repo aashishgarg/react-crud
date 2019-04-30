@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-class PostForm extends Component {
+class PostEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,21 +16,19 @@ class PostForm extends Component {
     }
 
     componentDidMount() {
-        if (this.props.match.url.indexOf('/new') === -1) {
-            axios({
-                method: 'GET',
-                url: 'http://localhost:4000/posts/' + this.props.match.params.id + '.json'
-            }).then((res) => {
-                this.setState({
-                    id: res.data.id,
-                    title: res.data.title,
-                    subject: res.data.subject,
-                    content: res.data.content
-                });
-            }).catch((e) => {
-                console.error(e);
+        axios({
+            method: 'GET',
+            url: 'http://localhost:4000/posts/' + this.props.match.params.id + '.json'
+        }).then((res) => {
+            this.setState({
+                id: res.data.id,
+                title: res.data.title,
+                subject: res.data.subject,
+                content: res.data.content
             });
-        }
+        }).catch((e) => {
+            console.error(e);
+        });
     }
 
     titleChanged(e) {
@@ -53,9 +51,10 @@ class PostForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+
         axios({
-            method: 'POST',
-            url: 'http://localhost:4000/posts.json',
+            method: 'PUT',
+            url: `http://localhost:4000/posts/${this.props.match.params.id}.json`,
             data: {
                 post: {
                     title: this.state.title,
@@ -64,7 +63,7 @@ class PostForm extends Component {
                 }
             }
         }).then((res) => {
-            this.props.history.push("/posts");
+            this.props.history.push(`/posts/${this.props.match.params.id}`);
         })
     };
 
@@ -104,4 +103,4 @@ class PostForm extends Component {
     }
 }
 
-export default PostForm;
+export default PostEdit;
