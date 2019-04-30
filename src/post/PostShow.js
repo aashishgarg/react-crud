@@ -31,12 +31,12 @@ class PostShow extends Component {
 
     render() {
         return (
-            <div>
-                <div>
-                    <div>Post Details</div>
-                    <div>Title: {this.state.title}</div>
-                    <div>Subject: {this.state.subject}</div>
-                    <div>Content: {this.state.content}</div>
+            <div className='page-header'>
+                <div className="jumbotron">
+                    <h1>Post</h1>
+                    Title: <p>{this.state.title}</p>
+                    Subject: <p>{this.state.subject}</p>
+                    Content: <p>{this.state.content}</p>
                 </div>
             </div>
         )

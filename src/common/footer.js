@@ -3,10 +3,11 @@ import React, {Component} from 'react';
 class Footer extends Component {
     render() {
         return (
-            <div>
-                <h3>
+            <div className='row'>
+                <div>
+                    <hr size='30'></hr>
                     A Simple CRUD application for POST
-                </h3>
+                </div>
             </div>
         )
     }

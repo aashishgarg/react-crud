@@ -17,17 +17,17 @@ class PostIndex extends Component {
 
     render() {
         return (
-            <div>
+            <div className='row'>
                 <div>
                     <h1>All Posts</h1>
                 </div>
-                <table>
+                <table className='table table-striped table-hover'>
                     <thead>
                     <tr>
                         <th>Title</th>
                         <th>Subject</th>
                         <th>Content</th>
-                        <th></th>
+                        <th>#</th>
                     </tr>
                     </thead>
                     <tbody>

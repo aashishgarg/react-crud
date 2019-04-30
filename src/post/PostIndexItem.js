@@ -9,9 +9,7 @@ class PostIndexItem extends Component {
                 <td>{this.props.subject}</td>
                 <td>{this.props.content}</td>
                 <td>
-                    <Link to={`/posts/${this.props.id}`}>Show</Link>
-                    <Link to={`/posts/${this.props.id}/edit`}>Edit</Link>
-                    Delete
+                    <span><Link to={`/posts/${this.props.id}`}>Show</Link></span> | <span><Link to={`/posts/${this.props.id}/edit`}>Edit</Link></span> | <span>Delete</span>
                 </td>
             </tr>
         )
