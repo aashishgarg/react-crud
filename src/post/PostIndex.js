@@ -8,7 +8,34 @@ class PostIndex extends Component {
         this.state = {
             posts: []
         };
+    }
 
+    deletePost = (rowId) => {
+        axios.delete(`http://localhost:4000/posts/${rowId}.json`)
+            .then((res) => {
+                const posts = this.state.posts.filter((row) => row.id !== rowId);
+                this.setState({posts: posts});
+            }).catch((e) => {
+                console.error(e);
+        });
+
+    };
+
+    sortBy = (key) => {
+        let posts = [...this.state.posts];
+        posts.sort(this.compareBy(key));
+        this.setState({posts: posts});
+    };
+
+    compareBy = (key) => {
+        return function(a, b) {
+            if (a[key] < b[key]) return -1;
+            if (a[key] > b[key]) return 1;
+            return 0;
+        };
+    };
+
+    componentDidMount() {
         axios.get('http://localhost:4000/posts.json').then(res => {
             const posts = res.data;
             this.setState({posts});
@@ -16,6 +43,9 @@ class PostIndex extends Component {
     }
 
     render() {
+        const posts = this.state.posts.map((postData) =>
+            <PostIndexItem deletePost={this.deletePost} key={postData.id} {...postData} />);
+
         return (
             <div className='row'>
                 <div>
@@ -24,23 +54,15 @@ class PostIndex extends Component {
                 <table className='table table-striped table-hover'>
                     <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Subject</th>
-                        <th>Content</th>
+                        <th onClick={() => this.sortBy('title')}>Title</th>
+                        <th onClick={() => this.sortBy('subject')}>Subject</th>
+                        <th onClick={() => this.sortBy('content')}>Content</th>
                         <th>#</th>
                     </tr>
                     </thead>
                     <tbody>
                     {
-                        this.state.posts.map((post, index) =>
-                            <PostIndexItem
-                                title={post.title}
-                                subject={post.subject}
-                                content={post.content}
-                                key={post.id}
-                                index={index}
-                                id={post.id}
-                            />)
+                        posts
                     }
                     </tbody>
                 </table>

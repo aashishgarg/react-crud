@@ -1,19 +1,18 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import './PostIndexItem.css'
 
-class PostIndexItem extends Component {
-    render() {
-        return (
-            <tr>
-                <td>{this.props.title}</td>
-                <td>{this.props.subject}</td>
-                <td>{this.props.content}</td>
-                <td>
-                    <span><Link to={`/posts/${this.props.id}`}>Show</Link></span> | <span><Link to={`/posts/${this.props.id}/edit`}>Edit</Link></span> | <span>Delete</span>
-                </td>
-            </tr>
-        )
-    }
-}
+const PostIndexItem = ({id, title, subject, content, deletePost}) => (
+    <tr>
+        <td>{title}</td>
+        <td>{subject}</td>
+        <td>{content}</td>
+        <td>
+            <span><Link to={`/posts/${id}`}>Show</Link></span>|
+            <span><Link to={`/posts/${id}/edit`}>Edit</Link></span>|
+            <span><button onClick={() => deletePost(id)}>Delete</button></span>
+        </td>
+    </tr>
+);
 
 export default PostIndexItem;
